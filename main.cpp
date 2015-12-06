@@ -69,6 +69,12 @@ int main (int argc, char** argv) {
                 case SDLK_p: // pause if P pressed
                     pause = !pause;
                     break;
+                case SDLK_g: // mouse grabbing if G pressed
+                    if(SDL_WM_GrabInput(SDL_GRAB_QUERY) == SDL_GRAB_OFF)
+                        SDL_WM_GrabInput(SDL_GRAB_ON);
+                    else
+                        SDL_WM_GrabInput(SDL_GRAB_OFF);
+                    break;
                 case SDLK_KP1:
                     ball.set_difficulty(1);
                     break;
