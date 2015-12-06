@@ -67,7 +67,10 @@ bool Brick::handle(int& brick_number) {
 
     if(ball->get_x() > brick_pos.x && ball->get_x() < brick_pos.x+BRICK_LENGHT) {
         if(ball->get_y()-BALL_SIDE/2 < brick_pos.y+BRICK_HEIGHT && ball->get_y()+BALL_SIDE/2 > brick_pos.y) { // Rebound on the top/bottom edge ?
-            ball->rebound_y();
+            if(ball->get_y() < brick_pos.y+BRICK_HEIGHT/2) // Top edge
+                ball->rebound(2);
+            else // Bottom edge
+                ball->rebound(-2);
             if(type != UNBREAKABLE) {
                 set_type(NONE);
                 broken = true;
@@ -76,7 +79,10 @@ bool Brick::handle(int& brick_number) {
     }
     else if(ball->get_y() > brick_pos.y && ball->get_y() < brick_pos.y+BRICK_HEIGHT) {
         if(ball->get_x()-BALL_SIDE/2 < brick_pos.x+BRICK_LENGHT && ball->get_x()+BALL_SIDE/2 > brick_pos.x) { // Rebound on the right/left edge ?
-            ball->rebound_x();
+            if(ball->get_x() < brick_pos.x+BRICK_LENGHT/2) // Right edge
+                ball->rebound(1);
+            else // Left edge
+                ball->rebound(-1);
             if(type != UNBREAKABLE) {
                 set_type(NONE);
                 broken = true;

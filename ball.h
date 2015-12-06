@@ -16,12 +16,7 @@ class Ball {
     int get_y() {
         return y;
     }
-    void rebound_x() {
-        x_vel*=-1;
-    }
-    void rebound_y() {
-        y_vel*=-1;
-    }
+    void rebound(int direction);
 
     private:
     void draw();

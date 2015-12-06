@@ -17,6 +17,14 @@ Ball::~Ball() {
     SDL_FreeSurface(surface);
 }
 
+void Ball::rebound(int direction) {
+    if(direction == -1 && x_vel > 0 ||
+       direction == 1 && x_vel < 0)
+        x_vel *= -1;
+    else if(direction == -2 && y_vel > 0 ||
+            direction == 2 && y_vel < 0)
+        y_vel *= -1;
+}
 void Ball::run(bool move) {
     x = 315;
     y = 445;
@@ -28,18 +36,18 @@ bool Ball::handle(int ellapsed_time) {
     x = x - x_vel*ellapsed_time/1000.0;
     y = y - y_vel*ellapsed_time/1000.0;
     if(y < 20)
-        rebound_y(); // Rebound on the edge !
+        rebound(-2); // Rebound on the top edge !
     else if(x < 20)
-        rebound_x(); // Rebound on the edge !
+        rebound(-1); // Rebound on the right edge !
     else if(x > 620)
-        rebound_x(); // Rebound on the edge !
+        rebound(1); // Rebound on the left edge !
     else if(y > 470) {
         cout << "You lost !" << endl;
         return true;
     }
     else if(y > 455 &&
             racquet->get_x()-RACQUET_LENGHT/2 < x && racquet->get_x()+RACQUET_LENGHT/2 > x) { // Racquet collision ?
-        rebound_y(); // Rebound on the racquet !
+        rebound(2); // Rebound on the racquet !
         x_vel=(racquet->get_x()-x)*10; // Change the horizontal velocity
     }
     draw();
