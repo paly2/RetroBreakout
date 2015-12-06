@@ -23,3 +23,4 @@ Press return to begin the game.
 - Escape : Quit the program
 - P : pause
 - Return : throw (again) the ball (Use this key to begin. You can also use it when the ball doesn't come back to the racquet.)
+- Keypad numbers : change difficulty (ball speed) (1 = 100 pixels per second ; 2 = 200 pixels per second ; 3 = 300 pixels per second...) (default value : 4)

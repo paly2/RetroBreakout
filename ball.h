@@ -16,12 +16,16 @@ class Ball {
     int get_y() {
         return y;
     }
+    void set_difficulty(int new_difficulty);
     void rebound(int direction);
 
     private:
+    void calc_vel(const double Radians);
     void draw();
     double x, y;
-    int x_vel, y_vel;
+    int x_vel, y_vel, vel;
+    int difficulty;
+    double radians;
     SDL_Surface *surface, *screen;
     Racquet *racquet;
 };

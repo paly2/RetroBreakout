@@ -69,6 +69,33 @@ int main (int argc, char** argv) {
                 case SDLK_p: // pause if P pressed
                     pause = !pause;
                     break;
+                case SDLK_KP1:
+                    ball.set_difficulty(1);
+                    break;
+                case SDLK_KP2:
+                    ball.set_difficulty(2);
+                    break;
+                case SDLK_KP3:
+                    ball.set_difficulty(3);
+                    break;
+                case SDLK_KP4:
+                    ball.set_difficulty(4);
+                    break;
+                case SDLK_KP5:
+                    ball.set_difficulty(5);
+                    break;
+                case SDLK_KP6:
+                    ball.set_difficulty(6);
+                    break;
+                case SDLK_KP7:
+                    ball.set_difficulty(7);
+                    break;
+                case SDLK_KP8:
+                    ball.set_difficulty(8);
+                    break;
+                case SDLK_KP9:
+                    ball.set_difficulty(9);
+                    break;
                 }
                 break;
             case SDL_MOUSEMOTION:
@@ -91,8 +118,8 @@ int main (int argc, char** argv) {
         }
 
         ellapsed_time = SDL_GetTicks() - start_time;
-        if (ellapsed_time < 20) {
-            SDL_Delay(20 - ellapsed_time);
+        if (ellapsed_time < 12) {
+            SDL_Delay(12 - ellapsed_time);
         }
     }
 

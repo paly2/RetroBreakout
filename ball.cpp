@@ -1,5 +1,6 @@
 #include <SDL/SDL.h>
 #include <iostream>
+#include <cmath>
 #include "defines.h"
 #include "ball.h"
 
@@ -12,6 +13,7 @@ Ball::Ball(SDL_Surface *screen, Racquet *racquet) : screen(screen), racquet(racq
     draw();
     x_vel = 0;
     y_vel = 0;
+    difficulty = 4;
 }
 Ball::~Ball() {
     SDL_FreeSurface(surface);
@@ -25,11 +27,38 @@ void Ball::rebound(int direction) {
             direction == 2 && y_vel < 0)
         y_vel *= -1;
 }
+
+void Ball::calc_vel(const double Radians) {
+    radians = Radians;
+    y_vel = cos(radians)*vel;
+    x_vel = sin(radians)*vel;
+}
+
 void Ball::run(bool move) {
     x = 315;
     y = 445;
-    x_vel = 0;
-    y_vel = (move) ? BALL_Y_SPEED : 0;
+    vel = (move) ? difficulty*100 : 0;
+    calc_vel(0);
+}
+
+void Ball::set_difficulty(int new_difficulty) {
+    difficulty = new_difficulty;
+    vel = difficulty*100;
+    if(y_vel == 0 && x_vel == 0)
+        return;
+
+    bool inv_y = false, inv_x = false;
+    if(y_vel < 0)
+        inv_y = true;
+    if(x_vel > 0)
+        inv_x = true;
+    if(radians > 0)
+        inv_x = !inv_x;
+    calc_vel(radians);
+    if(inv_y)
+        y_vel *= -1;
+    if(inv_x)
+        x_vel *= -1;
 }
 
 bool Ball::handle(int ellapsed_time) {
@@ -48,7 +77,7 @@ bool Ball::handle(int ellapsed_time) {
     else if(y > 455 &&
             racquet->get_x()-RACQUET_LENGHT/2 < x && racquet->get_x()+RACQUET_LENGHT/2 > x) { // Racquet collision ?
         rebound(2); // Rebound on the racquet !
-        x_vel=(racquet->get_x()-x)*10; // Change the horizontal velocity
+        calc_vel((racquet->get_x()-x)*(M_PI_2/(RACQUET_LENGHT/2))); // Change radians
     }
     draw();
     return false;

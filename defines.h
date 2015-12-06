@@ -6,6 +6,5 @@
 #define BALL_SIDE 10
 #define BRICK_LENGHT (640-20*2)/20
 #define BRICK_HEIGHT (480-20*2-330)/10
-#define BALL_Y_SPEED 400
 
 #endif // DEFINES_H_INCLUDED
