@@ -15,6 +15,8 @@ Just type these commands in a terminal :
 To run the program, just excute the `RetroBreakout` executable. You don't need to run it in a terminal, however that's recommanded to see the text messages printed.  
 If you are in the program directory, you can do :  
 `./RetroBreakout`  
+or, if you want the game to be in full screen :  
+`./RetroBreakout --fullscreen`  
 Press return to begin the game.
 
 ### Controls

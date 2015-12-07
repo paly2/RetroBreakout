@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <unistd.h>
+#include <cstring>
 
 #include "defines.h"
 #include "racquet.h"
@@ -21,9 +22,13 @@ int main (int argc, char** argv) {
     atexit(SDL_Quit);
 
     // create a new window with a title
-    SDL_Surface *screen = SDL_SetVideoMode(640, 480, 16, SDL_HWSURFACE|SDL_DOUBLEBUF);
+    SDL_Surface *screen = NULL;
+    if(strcmp(argv[argc-1], "--fullscreen") == 0)
+        screen = SDL_SetVideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 16, SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_FULLSCREEN);
+    else
+        screen = SDL_SetVideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 16, SDL_HWSURFACE|SDL_DOUBLEBUF);
     if (!screen) {
-        cout << "Unable to set 640x480 video: " << SDL_GetError() << endl;
+        cout << "Unable to set " << WINDOW_WIDTH << "x" << WINDOW_HEIGHT << " video: " << SDL_GetError() << endl;
         return 1;
     }
     SDL_WM_SetCaption("Retro Breakout!", NULL);
@@ -69,7 +74,7 @@ int main (int argc, char** argv) {
                 case SDLK_p: // pause if P pressed
                     pause = !pause;
                     break;
-                case SDLK_g: // mouse grabbing if G pressed
+                case SDLK_g:
                     if(SDL_WM_GrabInput(SDL_GRAB_QUERY) == SDL_GRAB_OFF)
                         SDL_WM_GrabInput(SDL_GRAB_ON);
                     else

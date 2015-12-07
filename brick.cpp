@@ -9,14 +9,14 @@
 using namespace std;
 
 Brick::Brick() {
-    surface = SDL_CreateRGBSurface(SDL_HWSURFACE, BRICK_LENGHT, BRICK_HEIGHT, 16, 0, 0, 0, 0);
+    surface = SDL_CreateRGBSurface(SDL_HWSURFACE, BRICK_WIDTH, BRICK_HEIGHT, 16, 0, 0, 0, 0);
 }
 Brick::~Brick() {
     SDL_FreeSurface(surface);
 }
 
 void Brick::coords(int i, int j, SDL_Surface *screen_, Ball *ball_) {
-    brick_pos.x = 20+BRICK_LENGHT*(j);
+    brick_pos.x = 20+BRICK_WIDTH*(j);
     brick_pos.y = 20+BRICK_HEIGHT*(i);
     screen = screen_;
     ball = ball_;
@@ -65,7 +65,7 @@ bool Brick::handle(int& brick_number) {
 
     bool broken = false;
 
-    if(ball->get_x() > brick_pos.x && ball->get_x() < brick_pos.x+BRICK_LENGHT) {
+    if(ball->get_x() > brick_pos.x && ball->get_x() < brick_pos.x+BRICK_WIDTH) {
         if(ball->get_y()-BALL_SIDE/2 < brick_pos.y+BRICK_HEIGHT && ball->get_y()+BALL_SIDE/2 > brick_pos.y) { // Rebound on the top/bottom edge ?
             if(ball->get_y() < brick_pos.y+BRICK_HEIGHT/2) // Top edge
                 ball->rebound(2);
@@ -78,8 +78,8 @@ bool Brick::handle(int& brick_number) {
         }
     }
     else if(ball->get_y() > brick_pos.y && ball->get_y() < brick_pos.y+BRICK_HEIGHT) {
-        if(ball->get_x()-BALL_SIDE/2 < brick_pos.x+BRICK_LENGHT && ball->get_x()+BALL_SIDE/2 > brick_pos.x) { // Rebound on the right/left edge ?
-            if(ball->get_x() < brick_pos.x+BRICK_LENGHT/2) // Right edge
+        if(ball->get_x()-BALL_SIDE/2 < brick_pos.x+BRICK_WIDTH && ball->get_x()+BALL_SIDE/2 > brick_pos.x) { // Rebound on the right/left edge ?
+            if(ball->get_x() < brick_pos.x+BRICK_WIDTH/2) // Right edge
                 ball->rebound(1);
             else // Left edge
                 ball->rebound(-1);

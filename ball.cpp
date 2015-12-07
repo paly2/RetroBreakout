@@ -68,16 +68,16 @@ bool Ball::handle(int ellapsed_time) {
         rebound(-2); // Rebound on the top edge !
     else if(x < 20)
         rebound(-1); // Rebound on the right edge !
-    else if(x > 620)
+    else if(x > WINDOW_WIDTH-20)
         rebound(1); // Rebound on the left edge !
-    else if(y > 470) {
+    else if(y > WINDOW_HEIGHT-10) {
         cout << "You lost !" << endl;
         return true;
     }
-    else if(y > 455 &&
-            racquet->get_x()-RACQUET_LENGHT/2 < x && racquet->get_x()+RACQUET_LENGHT/2 > x) { // Racquet collision ?
+    else if(y > WINDOW_HEIGHT-25 &&
+            racquet->get_x()-RACQUET_WIDTH/2 < x && racquet->get_x()+RACQUET_WIDTH/2 > x) { // Racquet collision ?
         rebound(2); // Rebound on the racquet !
-        calc_vel((racquet->get_x()-x)*(M_PI_2/(RACQUET_LENGHT/2))); // Change radians
+        calc_vel((racquet->get_x()-x)*(M_PI_2/(RACQUET_WIDTH/2))); // Change radians
     }
     draw();
     return false;
