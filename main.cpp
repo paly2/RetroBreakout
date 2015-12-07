@@ -21,7 +21,8 @@ int main (int argc, char** argv) {
     // make sure SDL cleans up before exit
     atexit(SDL_Quit);
 
-    // create a new window with a title
+    // create a new window with a title and an icon
+    SDL_WM_SetIcon(SDL_LoadBMP("icon.bmp"), NULL);
     SDL_Surface *screen = NULL;
     if(strcmp(argv[argc-1], "--fullscreen") == 0)
         screen = SDL_SetVideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 16, SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_FULLSCREEN);
