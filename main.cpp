@@ -49,7 +49,7 @@ int main (int argc, char** argv) {
 
     // program main loop
     bool done = false;
-    bool pause = false;
+    bool pause = false, focus = true, input_focus = true;
     while (!done) {
         // message processing loop
         start_time = SDL_GetTicks();
@@ -112,13 +112,31 @@ int main (int argc, char** argv) {
             case SDL_MOUSEMOTION:
                 racket_x = event.motion.x;
                 break;
+            case SDL_ACTIVEEVENT:
+                if((event.active.state & SDL_APPMOUSEFOCUS) == SDL_APPMOUSEFOCUS) {
+                    if(event.active.gain == 0)
+                        focus = false;
+                    else if(event.active.gain == 1 && input_focus)
+                        focus = true;
+                }
+                if((event.active.state & SDL_APPINPUTFOCUS) == SDL_APPINPUTFOCUS) {
+                    if(event.active.gain == 0) {
+                        input_focus = false;
+                        focus = false;
+                    }
+                    else if(event.active.gain == 1) {
+                        input_focus = true;
+                        focus = true;
+                    }
+                }
+                break;
             }
         }
         current_time = SDL_GetTicks();
         ellapsed_time = current_time - last_time;
         last_time = current_time;
 
-        if(!pause) {
+        if(!pause && focus) {
             SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0)); // Clear screen
             racquet.draw(racket_x); // Draw racquet
             if(ball.handle(ellapsed_time)) // Handle ball
