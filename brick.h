@@ -4,7 +4,7 @@
 #include <SDL/SDL.h>
 #include "ball.h"
 
-enum brick_type { NONE = '0', RED = '1', ORANGE = '2', BLUE1 = '3', BLUE2 = '4', GREEN1 = '5', GREEN2 = '6', YELLOW = '7', GREY = '8', WHITE  = '9', UNBREAKABLE = 'U' };
+enum brick_type { NONE = ' ', RED = '1', ORANGE = '2', BLUE1 = '3', BLUE2 = '4', GREEN1 = '5', GREEN2 = '6', YELLOW = '7', GREY = '8', WHITE  = '9', UNBREAKABLE = 'U' };
 
 class Brick {
     public:

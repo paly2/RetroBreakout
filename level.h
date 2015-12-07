@@ -10,7 +10,7 @@
 using namespace std;
 
 namespace level {
-    extern Brick bricks[20][20];
+    extern Brick bricks[30][20];
     extern int brick_number;
     extern int level_number;
 
