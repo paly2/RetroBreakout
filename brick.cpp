@@ -95,7 +95,7 @@ bool Brick::handle(int& brick_number) {
         brick_number--;
         cout << "Brick broken ! There remains " << brick_number << " bricks." << endl;
         if(brick_number == 0) {
-            cout << "You won !" << endl;
+            cout << "You won !" << endl << "Min difficulty : " << ball->get_min_difficulty() << endl;
             return true;
         }
     }

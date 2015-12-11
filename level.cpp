@@ -59,4 +59,6 @@ void level::load(SDL_Surface *screen_, Ball *ball_, int Level_number) {
     draw(); // And draw the level
 
     fclose(level_file);
+
+    cout << "Level " << level_number << endl;
 }

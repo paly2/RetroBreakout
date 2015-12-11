@@ -81,6 +81,9 @@ int main (int argc, char** argv) {
                     else
                         SDL_WM_GrabInput(SDL_GRAB_OFF);
                     break;
+                case SDLK_F5:
+                    SDL_WM_ToggleFullScreen(screen);
+                    break;
                 case SDLK_KP1:
                     ball.set_difficulty(1);
                     break;

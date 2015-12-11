@@ -16,6 +16,9 @@ class Ball {
     int get_y() {
         return y;
     }
+    int get_min_difficulty() {
+        return min_difficulty;
+    }
     void set_difficulty(int new_difficulty);
     void rebound(int direction);
 
@@ -24,7 +27,7 @@ class Ball {
     void draw();
     double x, y;
     int x_vel, y_vel, vel;
-    int difficulty;
+    int difficulty, min_difficulty;
     double radians;
     SDL_Surface *surface, *screen;
     Racquet *racquet;

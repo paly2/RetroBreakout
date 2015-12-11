@@ -13,7 +13,8 @@ Ball::Ball(SDL_Surface *screen, Racquet *racquet) : screen(screen), racquet(racq
     draw();
     x_vel = 0;
     y_vel = 0;
-    difficulty = 4;
+    difficulty = DEFAULT_DIFFICULTY;
+    min_difficulty = 0;
 }
 Ball::~Ball() {
     SDL_FreeSurface(surface);
@@ -39,10 +40,14 @@ void Ball::run(bool move) {
     y = 445;
     vel = (move) ? difficulty*100 : 0;
     calc_vel(0);
+    if(min_difficulty == 0 && move == true)
+        min_difficulty = difficulty;
 }
 
 void Ball::set_difficulty(int new_difficulty) {
     difficulty = new_difficulty;
+    if(difficulty < min_difficulty || min_difficulty == 0)
+        min_difficulty = difficulty;
     vel = difficulty*100;
     if(y_vel == 0 && x_vel == 0)
         return;
