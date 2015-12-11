@@ -25,5 +25,6 @@ Press return to begin the game.
 - Escape : Quit the program
 - P : pause
 - G : mouse grabbing activation/deactivation (default value : deactivate)
+- F5 : fullscreen (only works with X11) (default value : no, but you can change it by using the `--fullscreen` option (see `Run the program`))
 - Return : throw (again) the ball (Use this key to begin. You can also use it when the ball doesn't come back to the racquet.)
 - Keypad numbers : change difficulty (ball speed) (1 = 100 pixels per second ; 2 = 200 pixels per second ; 3 = 300 pixels per second...) (default value : 4)
